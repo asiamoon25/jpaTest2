@@ -9,5 +9,6 @@ import java.util.List;
 @Repository
 public interface MemberRepository extends JpaRepository<MemberVO,Long> {
 
+    public MemberVO findByMbrNo(Long mbrNo);
 
 }

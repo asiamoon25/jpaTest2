@@ -2,10 +2,7 @@ package com.study.jpatest2.controller;
 
 import com.study.jpatest2.service.MemberService;
 import com.study.jpatest2.vo.MemberVO;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +22,17 @@ public class MemberController {
     public Map<String, List<MemberVO>> memberList(){
         Map<String,List<MemberVO>> list = new HashMap<>();
         list.put("list",memberService.findAll());
+        return list;
+    }
+    @GetMapping("/board-detail")
+    public Map<String,MemberVO> memberDetail(@RequestParam Map<String,String>params){
+
+        Long mbrNo = Long.parseLong(params.get("mbrNo"));
+
+        Map<String,MemberVO> list = new HashMap<>();
+
+        list.put("list",memberService.findByMbrNo(mbrNo));
+
         return list;
     }
 }

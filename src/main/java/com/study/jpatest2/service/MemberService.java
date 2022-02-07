@@ -20,4 +20,8 @@ public class MemberService {
         memberRepository.findAll().forEach(e-> members.add(e));
         return members;
     }
+
+    public MemberVO findByMbrNo(Long mbrNo){
+        return memberRepository.findByMbrNo(mbrNo);
+    }
 }

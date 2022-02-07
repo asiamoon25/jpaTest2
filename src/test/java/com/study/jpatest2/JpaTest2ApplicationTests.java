@@ -21,4 +21,10 @@ class JpaTest2ApplicationTests {
         System.out.println(memberService.findAll());
     }
 
+    @Test
+    void 테스트2(){
+
+        System.out.println(memberService.findByMbrNo(1L));
+    }
+
 }

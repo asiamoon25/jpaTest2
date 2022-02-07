@@ -18,7 +18,7 @@
           <tr
             v-for="(item,i) in desserts"
             :key="i"
-            @click="move()"
+            @click="move(item.mbrNo)"
           >
             <td>{{ item.mbrNo }}</td>
             <td>{{ item.id }}</td>
@@ -46,8 +46,8 @@ export default {
       })
   },
   methods: {
-    move () {
-      this.$router.push('/').catch(err => { console.log(err) })
+    move (mbrNo) {
+      this.$router.push('/board/' + mbrNo).catch(err => { console.log(err) })
     }
   }
 }
