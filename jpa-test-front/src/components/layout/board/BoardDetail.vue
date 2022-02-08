@@ -1,8 +1,10 @@
 <template>
 <div v-bind="list">
-  {{list.mbrNo}}
-  {{list.name}}
-  {{list.id}}
+  {{list.bno}}
+  {{list.title}}
+  {{list.content}}
+  {{list.writer}}
+  {{list.writeDate}}
 </div>
 </template>
 
@@ -13,9 +15,9 @@ export default {
     list: []
   }),
   beforeCreate () {
-    const mbrNo = this.$route.params.mbrNo
+    const bno = this.$route.params.bno
     // eslint-disable-next-line no-undef
-    axios.get('/api/board-detail', { params: { mbrNo: mbrNo } })
+    axios.get('/api/board-detail', { params: { bno: bno } })
       .then(res => {
         this.list = res.data.list
       })

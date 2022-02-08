@@ -17,22 +17,4 @@ public class MemberController {
     public MemberController(MemberService memberService) {
         this.memberService = memberService;
     }
-
-    @GetMapping("/board")
-    public Map<String, List<MemberVO>> memberList(){
-        Map<String,List<MemberVO>> list = new HashMap<>();
-        list.put("list",memberService.findAll());
-        return list;
-    }
-    @GetMapping("/board-detail")
-    public Map<String,MemberVO> memberDetail(@RequestParam Map<String,String>params){
-
-        Long mbrNo = Long.parseLong(params.get("mbrNo"));
-
-        Map<String,MemberVO> list = new HashMap<>();
-
-        list.put("list",memberService.findByMbrNo(mbrNo));
-
-        return list;
-    }
 }

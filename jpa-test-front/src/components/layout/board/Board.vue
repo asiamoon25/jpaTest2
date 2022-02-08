@@ -7,22 +7,38 @@
               No
             </th>
             <th class="text-left">
-              Id
+              Title
             </th>
             <th class="text-left">
-              Name
+              Content
+            </th>
+            <th class="text-left">
+              Writer
+            </th>
+            <th>
+              Date
+            </th><th>
+              Like
             </th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="(item,i) in desserts"
+            v-for="(list,i) in lists"
             :key="i"
-            @click="move(item.mbrNo)"
           >
-            <td>{{ item.mbrNo }}</td>
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
+            <td @click="move(list.bno)">{{ list.bno }}</td>
+            <td @click="move(list.bno)">{{ list.title }}</td>
+            <td @click="move(list.bno)">{{ list.content }}</td>
+            <td @click="move(list.bno)">{{ list.writer}}</td>
+            <td @click="move(list.bno)">{{ list.writeDate}}</td>
+            <td>
+              <v-btn
+                class="primary"
+                x-small>
+                <v-icon>mdi-heart</v-icon>
+              </v-btn>
+            </td>
           </tr>
         </tbody>
     </v-simple-table>
@@ -34,20 +50,26 @@
 export default {
   name: 'Board',
   data: () => ({
-    desserts: []
+    lists: [],
+    icon: 'mdi-search'
   }),
   beforeCreate () {
+    let page = this.$route.query.page
+
+    if (page === null || page === '') {
+      page = '1'
+    }
     // eslint-disable-next-line no-undef
-    axios.get('/api/board')
+    axios.get('/api/board', { params: { page: page, size: 10, sort: 'bno,desc' } })
       .then(res => {
-        this.desserts = res.data.list
+        this.lists = res.data.content
       }).catch(err => {
         console.log(err)
       })
   },
   methods: {
-    move (mbrNo) {
-      this.$router.push('/board/' + mbrNo).catch(err => { console.log(err) })
+    move (bno) {
+      this.$router.push('/board/' + bno).catch(err => { console.log(err) })
     }
   }
 }
