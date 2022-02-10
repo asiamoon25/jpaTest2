@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="30 seconds">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <Pattern>%d{HH:mm} %-5level %logger{36} -%msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 백업 시기 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>C:\Users\LENOVO\Desktop\studyWorkSpace\jpaTest2\logs\access-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 파일 개수 최대 30개 그 이상가면 삭제 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <Pattern>%d{HH:mm} %-5level %logger{36} -%msg%n</Pattern>
+        </encoder>
+    </appender>
+
+    <!-- name 패키지에 속한 클래스에서 출력하는 로그는 info 이상의 레벨에 해당하는 것으로 출력 -->
+    <logger name="org.springframework" level="info"/>
+    <logger name="com.study.jpatest2" level="info"/>
+
+    <root level="debug">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>

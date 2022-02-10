@@ -20,9 +20,13 @@ export default [
         component: () => import(/* webpackChunkName: "chat" */ '@/components/layout/Chat')
       },
       {
-        path: ':mbrNo',
+        path: 'board-detail/:bno',
         name: 'BoardDetail',
         component: BoardDetail
+      },
+      {
+        path: ':page',
+        component: () => import(/* webpackChunkName: "board-page" */ '@/components/layout/board/Board')
       }
     ]
   }
