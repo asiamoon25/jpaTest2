@@ -18,11 +18,8 @@ public class CacheConfig {
 
     private final RedisConnectionFactory redisConnectionFactory;
 
-    private final ObjectMapper objectMapper;
-
     public CacheConfig(RedisConnectionFactory redisConnectionFactory, ObjectMapper objectMapper) {
         this.redisConnectionFactory = redisConnectionFactory;
-        this.objectMapper = objectMapper;
     }
 
     @Bean
@@ -34,10 +31,7 @@ public class CacheConfig {
                         .fromSerializer(new GenericJackson2JsonRedisSerializer()))
                 .entryTtl(Duration.ofSeconds(600)); //cache 유효시간 10분
 
-        RedisCacheManager redisCacheManager = RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(redisConnectionFactory)
+        return RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(redisConnectionFactory)
                 .cacheDefaults(redisCacheConfiguration).build();
-
-        return redisCacheManager;
     }
-
 }

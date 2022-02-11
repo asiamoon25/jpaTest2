@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -30,6 +31,8 @@ public class BoardController {
 
         return boardService.findAll(pageable);
     }
+
+    @Transactional(readOnly = true)
     @Cacheable(key = "#params", value = "boardDetail")
     @GetMapping("/board-detail")
     public Map<String,BoardVO> boardDetail(@RequestParam Map<String,String>params){

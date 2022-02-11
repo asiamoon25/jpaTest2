@@ -18,8 +18,7 @@ public class BoardService {
     public BoardService(BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
     }
-    @Transactional(readOnly = true)
-    @Cacheable(value = "boardList")
+
     public Page<BoardVO> findAll(Pageable pageable){
 
         return boardRepository.findAll(pageable);
