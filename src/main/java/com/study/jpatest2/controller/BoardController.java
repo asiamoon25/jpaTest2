@@ -26,14 +26,14 @@ public class BoardController {
         this.boardService = boardService;
     }
 
+    @Transactional(readOnly = true)
+    @Cacheable(key = "#params", value = "boardDetail")
     @GetMapping("/board")
     public Page<BoardVO> boardList(Pageable pageable){
 
         return boardService.findAll(pageable);
     }
 
-    @Transactional(readOnly = true)
-    @Cacheable(key = "#params", value = "boardDetail")
     @GetMapping("/board-detail")
     public Map<String,BoardVO> boardDetail(@RequestParam Map<String,String>params){
 
