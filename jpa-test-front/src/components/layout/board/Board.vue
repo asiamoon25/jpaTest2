@@ -71,6 +71,7 @@ export default {
       .then(res => {
         this.lists = res.data.content
         this.length = res.data.content.length
+        this.page = parseInt(page)
       }).catch(err => {
         console.log(err)
       })
