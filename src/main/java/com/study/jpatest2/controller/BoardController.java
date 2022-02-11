@@ -27,7 +27,7 @@ public class BoardController {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(key = "#params", value = "boardDetail")
+    @Cacheable(key = "#pageable", value = "boardDetail")
     @GetMapping("/board")
     public Page<BoardVO> boardList(Pageable pageable){
 
